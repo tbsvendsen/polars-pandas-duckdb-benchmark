@@ -79,19 +79,29 @@ def plot_overview(
     width = 0.25
 
     for i, engine in enumerate(ENGINE_ORDER):
-        medians = []
-        iqrs = []
+        medians: list[float] = []
+        err_lo: list[float] = []
+        err_hi: list[float] = []
         for op in ops_ordered:
             match = next(
                 (r for r in subset if r["engine"] == engine and r["operation"] == op),
                 None,
             )
             if match:
-                medians.append(match["median_seconds"] * 1000)
-                iqrs.append(match["iqr_seconds"] * 1000 / 2)
+                med = match["median_seconds"] * 1000
+                times = sorted(match.get("times_seconds", []))
+                if len(times) >= 4:
+                    q1 = times[len(times) // 4] * 1000
+                    q3 = times[3 * len(times) // 4] * 1000
+                else:
+                    q1 = q3 = med
+                medians.append(med)
+                err_lo.append(max(med - q1, 0))
+                err_hi.append(max(q3 - med, 0))
             else:
                 medians.append(0)
-                iqrs.append(0)
+                err_lo.append(0)
+                err_hi.append(0)
 
         bars = ax.bar(
             x + i * width,
@@ -99,16 +109,16 @@ def plot_overview(
             width,
             label=engine.capitalize(),
             color=ENGINE_COLORS[engine],
-            yerr=iqrs,
+            yerr=[err_lo, err_hi],
             capsize=3,
             error_kw={"linewidth": 0.8},
         )
 
-        for bar, val in zip(bars, medians, strict=True):
+        for bar, val, hi in zip(bars, medians, err_hi, strict=True):
             if val > 0:
                 ax.text(
                     bar.get_x() + bar.get_width() / 2,
-                    bar.get_height() + max(iqrs) * 0.3,
+                    bar.get_height() + hi + max(err_hi) * 0.15,
                     f"{val:.1f}",
                     ha="center",
                     va="bottom",

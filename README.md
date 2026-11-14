@@ -54,7 +54,7 @@ Each operation is measured with:
 | GC during timing | Disabled | Prevents collection pauses from distorting measurements |
 | Timer | `time.perf_counter` | Highest resolution monotonic clock |
 | Central tendency | Median | Robust to OS scheduling outliers |
-| Spread | IQR | Resistant to extreme values |
+| Error bars | Q1–Q3 | Asymmetric interquartile range around median |
 | Data seed | 42 | Deterministic, reproducible across machines |
 
 ### Operations
@@ -134,6 +134,11 @@ pytest
 | Static figures | Matplotlib ≥3.8 |
 | Interactive reports | Plotly ≥5.18 |
 | Testing | pytest, mypy (strict), ruff |
+
+## Related Projects
+
+- [medallion-template](https://github.com/tbsvendsen/medallion-template) — A data pipeline where the choice of DataFrame engine matters. Uses Polars.
+- [duckdb-data-quality](https://github.com/tbsvendsen/duckdb-data-quality) — Data quality checks for DuckDB, one of the engines benchmarked here.
 
 ## License
 

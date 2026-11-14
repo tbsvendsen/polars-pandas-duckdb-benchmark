@@ -38,8 +38,9 @@ SIMPLE_OPS = [
     "window_rank",
     "window_running_sum",
     "filter_sort",
-    "read_parquet",
 ]
+
+PATH_OPS = ["read_parquet"]
 
 JOIN_OPS = ["join_inner", "join_left"]
 
@@ -59,6 +60,9 @@ def _dispatch(
     exclude_keys: list[str],
 ) -> Any:
     func = OP_REGISTRY[op][engine]
+
+    if op in PATH_OPS:
+        return func(path)
 
     if op in SIMPLE_OPS:
         if engine == "duckdb":
@@ -91,7 +95,7 @@ def run_all(
 ) -> list[TimingResult]:
     dataset_names = DATASET_FILTER.get(size, [size])
     specs = [s for s in SPECS if s.name in dataset_names]
-    all_ops = SIMPLE_OPS + JOIN_OPS + ["join_anti"]
+    all_ops = SIMPLE_OPS + JOIN_OPS + ["join_anti"] + PATH_OPS
 
     all_results: list[TimingResult] = []
 

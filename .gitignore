@@ -11,7 +11,10 @@ venv/
 env/
 
 data/
-results/
+results/*.html
+results/*.json
+!results/results.json
+!results/figures/
 
 .pytest_cache/
 .mypy_cache/

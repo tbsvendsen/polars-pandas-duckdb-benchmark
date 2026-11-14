@@ -1,0 +1,793 @@
+{
+  "machine": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "processor": "arm",
+    "python_version": "3.11.7",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "ram_gb": 16.0
+  },
+  "results": [
+    {
+      "operation": "groupby",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0011460420209914446,
+        0.0011987087782472372,
+        0.0012982080224901438,
+        0.0012390830088406801,
+        0.0011890411842614412
+      ],
+      "median_seconds": 0.0011987087782472372,
+      "iqr_seconds": 5.004182457923889e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.0042641249019652605,
+        0.0047577908262610435,
+        0.005041791824623942,
+        0.004600249929353595,
+        0.004663417115807533
+      ],
+      "median_seconds": 0.004663417115807533,
+      "iqr_seconds": 0.00015754089690744877,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.00270995800383389,
+        0.0029292909894138575,
+        0.002894582925364375,
+        0.002899375045672059,
+        0.0027405829168856144
+      ],
+      "median_seconds": 0.002894582925364375,
+      "iqr_seconds": 0.00015879212878644466,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.000829207943752408,
+        0.0009803748689591885,
+        0.0010000001639127731,
+        0.0010128328576683998,
+        0.0009949998930096626
+      ],
+      "median_seconds": 0.0009949998930096626,
+      "iqr_seconds": 1.962529495358467e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.003431333927437663,
+        0.004045374924317002,
+        0.004149791086092591,
+        0.003908208105713129,
+        0.004019208950921893
+      ],
+      "median_seconds": 0.004019208950921893,
+      "iqr_seconds": 0.00013716681860387325,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.002140332944691181,
+        0.0027650841511785984,
+        0.002729583065956831,
+        0.0026813338045030832,
+        0.0026602500583976507
+      ],
+      "median_seconds": 0.0026813338045030832,
+      "iqr_seconds": 6.933300755918026e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_inner",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0011392920278012753,
+        0.0012492919340729713,
+        0.0014693341217935085,
+        0.0012995409779250622,
+        0.0013973331078886986
+      ],
+      "median_seconds": 0.0012995409779250622,
+      "iqr_seconds": 0.00014804117381572723,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_inner",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.00600454187951982,
+        0.006235583918169141,
+        0.00667587504722178,
+        0.006720083067193627,
+        0.006408333079889417
+      ],
+      "median_seconds": 0.006408333079889417,
+      "iqr_seconds": 0.000440291129052639,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_left",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0010313328821212053,
+        0.0011180411092936993,
+        0.001376166008412838,
+        0.001143834087997675,
+        0.001252708025276661
+      ],
+      "median_seconds": 0.001143834087997675,
+      "iqr_seconds": 0.00013466691598296165,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_left",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.006344417110085487,
+        0.007192916935309768,
+        0.006937040947377682,
+        0.006359583931043744,
+        0.006670665927231312
+      ],
+      "median_seconds": 0.006670665927231312,
+      "iqr_seconds": 0.0005774570163339376,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0010154589544981718,
+        0.0013694169465452433,
+        0.0010876250453293324,
+        0.0010450421832501888,
+        0.0011702908668667078
+      ],
+      "median_seconds": 0.0010876250453293324,
+      "iqr_seconds": 0.00012524868361651897,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        14.728990958072245,
+        14.667656333884224,
+        14.77619258291088,
+        14.914779083803296,
+        14.954339292133227
+      ],
+      "median_seconds": 14.77619258291088,
+      "iqr_seconds": 0.18578812573105097,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.011085208039730787,
+        0.012044500093907118,
+        0.012348375050351024,
+        0.012041250010952353,
+        0.011525291018188
+      ],
+      "median_seconds": 0.012041250010952353,
+      "iqr_seconds": 0.0005192090757191181,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.00338349980302155,
+        0.0029130838811397552,
+        0.0028680830728262663,
+        0.0027201250195503235,
+        0.003188458038493991
+      ],
+      "median_seconds": 0.0029130838811397552,
+      "iqr_seconds": 0.0003203749656677246,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.021883209003135562,
+        0.02210254198871553,
+        0.022411375073716044,
+        0.0225277089048177,
+        0.022561166901141405
+      ],
+      "median_seconds": 0.022411375073716044,
+      "iqr_seconds": 0.00042516691610217094,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.02160004200413823,
+        0.02203366602770984,
+        0.02211466687731445,
+        0.022510541137307882,
+        0.022409041179344058
+      ],
+      "median_seconds": 0.02211466687731445,
+      "iqr_seconds": 0.0003753751516342163,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.004107707878574729,
+        0.00439754081889987,
+        0.0041931248269975185,
+        0.004311750177294016,
+        0.004231208004057407
+      ],
+      "median_seconds": 0.004231208004057407,
+      "iqr_seconds": 0.00011862535029649734,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.013232125202193856,
+        0.013697874965146184,
+        0.013068125117570162,
+        0.01351437484845519,
+        0.013059375109151006
+      ],
+      "median_seconds": 0.013232125202193856,
+      "iqr_seconds": 0.00044624973088502884,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.028639791999012232,
+        0.027515749912708998,
+        0.028234333032742143,
+        0.02820558287203312,
+        0.028409041929990053
+      ],
+      "median_seconds": 0.028234333032742143,
+      "iqr_seconds": 0.00020345905795693398,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0022878749296069145,
+        0.0027748330030590296,
+        0.0022698750253766775,
+        0.0024197499733418226,
+        0.0023555830121040344
+      ],
+      "median_seconds": 0.0023555830121040344,
+      "iqr_seconds": 0.0001318750437349081,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.011486083967611194,
+        0.0115254579577595,
+        0.011886124964803457,
+        0.011248291935771704,
+        0.01172370812855661
+      ],
+      "median_seconds": 0.0115254579577595,
+      "iqr_seconds": 0.0002376241609454155,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.022745792055502534,
+        0.022239666897803545,
+        0.02170658390969038,
+        0.02180279209278524,
+        0.021462166914716363
+      ],
+      "median_seconds": 0.02180279209278524,
+      "iqr_seconds": 0.0005330829881131649,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "polars",
+      "dataset": "small",
+      "times_seconds": [
+        0.0031998329795897007,
+        0.00357241602614522,
+        0.0034609998110681772,
+        0.0035166670568287373,
+        0.003009375184774399
+      ],
+      "median_seconds": 0.0034609998110681772,
+      "iqr_seconds": 0.00031683407723903656,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "pandas",
+      "dataset": "small",
+      "times_seconds": [
+        0.006407874869182706,
+        0.0061543339397758245,
+        0.006354084005579352,
+        0.00633229105733335,
+        0.006622750079259276
+      ],
+      "median_seconds": 0.006354084005579352,
+      "iqr_seconds": 7.55838118493557e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "duckdb",
+      "dataset": "small",
+      "times_seconds": [
+        0.013922999845817685,
+        0.013741916045546532,
+        0.014039166970178485,
+        0.013961125165224075,
+        0.013812958030030131
+      ],
+      "median_seconds": 0.013922999845817685,
+      "iqr_seconds": 0.00014816713519394398,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0015282079111784697,
+        0.0017420840449631214,
+        0.0016752080991864204,
+        0.001713666133582592,
+        0.0016520831268280745
+      ],
+      "median_seconds": 0.0016752080991864204,
+      "iqr_seconds": 6.158300675451756e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.004895167192444205,
+        0.005456958897411823,
+        0.005269791930913925,
+        0.005201333900913596,
+        0.0051669159438461065
+      ],
+      "median_seconds": 0.005201333900913596,
+      "iqr_seconds": 0.00010287598706781864,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0026191670913249254,
+        0.003058875212445855,
+        0.0028817912098020315,
+        0.0032509160228073597,
+        0.0031602908857166767
+      ],
+      "median_seconds": 0.003058875212445855,
+      "iqr_seconds": 0.0002784996759146452,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0015235829632729292,
+        0.0017543749418109655,
+        0.0015875410754233599,
+        0.0015322498511523008,
+        0.001534000039100647
+      ],
+      "median_seconds": 0.001534000039100647,
+      "iqr_seconds": 5.5291224271059036e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.007131291087716818,
+        0.007293958915397525,
+        0.007987167220562696,
+        0.007738790940493345,
+        0.007668667007237673
+      ],
+      "median_seconds": 0.007668667007237673,
+      "iqr_seconds": 0.0004448320250958204,
+      "row_count": 100000
+    },
+    {
+      "operation": "groupby_high_card",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0033395420759916306,
+        0.003569917054846883,
+        0.003499500220641494,
+        0.003544584149494767,
+        0.0034102080389857292
+      ],
+      "median_seconds": 0.003499500220641494,
+      "iqr_seconds": 0.00013437611050903797,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_inner",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0011116249952465296,
+        0.0013359161093831062,
+        0.001385499956086278,
+        0.0014876248314976692,
+        0.001165082911029458
+      ],
+      "median_seconds": 0.0013359161093831062,
+      "iqr_seconds": 0.00022041704505681992,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_inner",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.00609183288179338,
+        0.006467000115662813,
+        0.00653345906175673,
+        0.006375583121553063,
+        0.006436667172238231
+      ],
+      "median_seconds": 0.006436667172238231,
+      "iqr_seconds": 9.14169941097498e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_inner",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        1.348552874987945,
+        1.3570925409439951,
+        1.338105499977246,
+        1.3480672501027584,
+        1.346981625072658
+      ],
+      "median_seconds": 1.3480672501027584,
+      "iqr_seconds": 0.0015712499152868986,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_left",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0015867918264120817,
+        0.0013417501468211412,
+        0.001302915858104825,
+        0.0012374999932944775,
+        0.0013095419853925705
+      ],
+      "median_seconds": 0.0013095419853925705,
+      "iqr_seconds": 3.883428871631622e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_left",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.007292957976460457,
+        0.006831875070929527,
+        0.006505958968773484,
+        0.006368542090058327,
+        0.0064084159675985575
+      ],
+      "median_seconds": 0.006505958968773484,
+      "iqr_seconds": 0.0004234591033309698,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_left",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        1.3425902500748634,
+        1.3376067921053618,
+        1.3373336249496788,
+        1.3440779999364167,
+        1.354087166953832
+      ],
+      "median_seconds": 1.3425902500748634,
+      "iqr_seconds": 0.006471207831054926,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0009343749843537807,
+        0.0011887908913195133,
+        0.0011521249543875456,
+        0.0010605838615447283,
+        0.0011275410652160645
+      ],
+      "median_seconds": 0.0011275410652160645,
+      "iqr_seconds": 9.15410928428173e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.028542750049382448,
+        0.02416633302345872,
+        0.024141374975442886,
+        0.024572041118517518,
+        0.02472991682589054
+      ],
+      "median_seconds": 0.024572041118517518,
+      "iqr_seconds": 0.0005635838024318218,
+      "row_count": 100000
+    },
+    {
+      "operation": "join_anti",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.01524837501347065,
+        0.01525454199872911,
+        0.01463854219764471,
+        0.014350750017911196,
+        0.014933541882783175
+      ],
+      "median_seconds": 0.014933541882783175,
+      "iqr_seconds": 0.0006098328158259392,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.002724665915593505,
+        0.002465584082528949,
+        0.0028517090249806643,
+        0.0025974169839173555,
+        0.0024192079436033964
+      ],
+      "median_seconds": 0.0025974169839173555,
+      "iqr_seconds": 0.0002590818330645561,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.023060749983415008,
+        0.023234083084389567,
+        0.022830500034615397,
+        0.022898083087056875,
+        0.022790374932810664
+      ],
+      "median_seconds": 0.022898083087056875,
+      "iqr_seconds": 0.00023024994879961014,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_rank",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.021535375155508518,
+        0.022150250151753426,
+        0.022944374941289425,
+        0.022677375003695488,
+        0.022601875010877848
+      ],
+      "median_seconds": 0.022601875010877848,
+      "iqr_seconds": 0.0005271248519420624,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.004776875022798777,
+        0.00493645784445107,
+        0.004625583067536354,
+        0.0047346248757094145,
+        0.004536082968115807
+      ],
+      "median_seconds": 0.0047346248757094145,
+      "iqr_seconds": 0.00015129195526242256,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.013883084058761597,
+        0.013634041883051395,
+        0.013929958920925856,
+        0.013779750093817711,
+        0.013822791166603565
+      ],
+      "median_seconds": 0.013822791166603565,
+      "iqr_seconds": 0.0001033339649438858,
+      "row_count": 100000
+    },
+    {
+      "operation": "window_running_sum",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.02865225006826222,
+        0.02819574996829033,
+        0.02819887502118945,
+        0.02886108309030533,
+        0.027716042008250952
+      ],
+      "median_seconds": 0.02819887502118945,
+      "iqr_seconds": 0.00045650009997189045,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.002412125002592802,
+        0.002541415859013796,
+        0.0024427908938378096,
+        0.002417667070403695,
+        0.0023598340339958668
+      ],
+      "median_seconds": 0.002417667070403695,
+      "iqr_seconds": 3.0665891245007515e-05,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.010656042024493217,
+        0.011644750135019422,
+        0.010796665912494063,
+        0.01097687496803701,
+        0.011537542100995779
+      ],
+      "median_seconds": 0.01097687496803701,
+      "iqr_seconds": 0.0007408761885017157,
+      "row_count": 100000
+    },
+    {
+      "operation": "filter_sort",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.021343000000342727,
+        0.021528499899432063,
+        0.021419000113382936,
+        0.020673583960160613,
+        0.02100533409975469
+      ],
+      "median_seconds": 0.021343000000342727,
+      "iqr_seconds": 0.0004136660136282444,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "polars",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.0031305840238928795,
+        0.0032855418976396322,
+        0.0032647501211613417,
+        0.0028742500580847263,
+        0.0028415832202881575
+      ],
+      "median_seconds": 0.0031305840238928795,
+      "iqr_seconds": 0.00039050006307661533,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "pandas",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.007346208905801177,
+        0.007870750036090612,
+        0.007680666167289019,
+        0.007537500001490116,
+        0.008067792048677802
+      ],
+      "median_seconds": 0.007680666167289019,
+      "iqr_seconds": 0.0003332500346004963,
+      "row_count": 100000
+    },
+    {
+      "operation": "read_parquet",
+      "engine": "duckdb",
+      "dataset": "small_high_card",
+      "times_seconds": [
+        0.013891416136175394,
+        0.014589166035875678,
+        0.014310833998024464,
+        0.014918750151991844,
+        0.014310959028080106
+      ],
+      "median_seconds": 0.014310959028080106,
+      "iqr_seconds": 0.0002783320378512144,
+      "row_count": 100000
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-size: 16px; font-weight: 600; fill: #1a1a2e; }
+    .subtitle { font-size: 11px; fill: #666; }
+    .box { rx: 6; ry: 6; stroke-width: 1.5; }
+    .box-label { font-size: 12px; font-weight: 600; fill: #fff; }
+    .box-detail { font-size: 10px; fill: #fff; opacity: 0.9; }
+    .note { font-size: 9px; fill: #888; }
+    .connector { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+  </style>
+
+  <text x="400" y="28" text-anchor="middle" class="title">Benchmark Methodology</text>
+  <text x="400" y="46" text-anchor="middle" class="subtitle">Systematic performance measurement with statistical rigor</text>
+
+  <!-- Phase 1: Data Generation -->
+  <rect x="30" y="70" width="150" height="80" class="box" fill="#4C78A8" stroke="#3b6190"/>
+  <text x="105" y="95" text-anchor="middle" class="box-label">Data Generation</text>
+  <text x="105" y="112" text-anchor="middle" class="box-detail">NumPy + Faker</text>
+  <text x="105" y="126" text-anchor="middle" class="box-detail">seed=42</text>
+  <text x="105" y="140" text-anchor="middle" class="box-detail">100K rows</text>
+
+  <!-- Phase 2: Warmup -->
+  <rect x="220" y="70" width="150" height="80" class="box" fill="#F58518" stroke="#d9700f"/>
+  <text x="295" y="95" text-anchor="middle" class="box-label">Warmup Phase</text>
+  <text x="295" y="112" text-anchor="middle" class="box-detail">2 discarded rounds</text>
+  <text x="295" y="126" text-anchor="middle" class="box-detail">JIT compilation</text>
+  <text x="295" y="140" text-anchor="middle" class="box-detail">Cache priming</text>
+
+  <!-- Phase 3: Timed Rounds -->
+  <rect x="410" y="70" width="150" height="80" class="box" fill="#54A24B" stroke="#438a3c"/>
+  <text x="485" y="95" text-anchor="middle" class="box-label">Timed Rounds</text>
+  <text x="485" y="112" text-anchor="middle" class="box-detail">5 measured rounds</text>
+  <text x="485" y="126" text-anchor="middle" class="box-detail">GC disabled</text>
+  <text x="485" y="140" text-anchor="middle" class="box-detail">perf_counter</text>
+
+  <!-- Phase 4: Statistics -->
+  <rect x="600" y="70" width="170" height="80" class="box" fill="#7B4F8A" stroke="#65407a"/>
+  <text x="685" y="95" text-anchor="middle" class="box-label">Statistical Analysis</text>
+  <text x="685" y="112" text-anchor="middle" class="box-detail">Median (robust center)</text>
+  <text x="685" y="126" text-anchor="middle" class="box-detail">IQR (spread measure)</text>
+  <text x="685" y="140" text-anchor="middle" class="box-detail">All individual times</text>
+
+  <!-- Connectors -->
+  <line x1="180" y1="110" x2="218" y2="110" class="connector"/>
+  <line x1="370" y1="110" x2="408" y2="110" class="connector"/>
+  <line x1="560" y1="110" x2="598" y2="110" class="connector"/>
+
+  <!-- Operations grid -->
+  <rect x="30" y="180" width="740" height="65" rx="6" ry="6" fill="#f8f9fa" stroke="#ddd" stroke-width="1"/>
+  <text x="50" y="200" font-size="11" font-weight="600" fill="#333">9 Operations:</text>
+  <text x="50" y="218" font-size="10" fill="#555">groupby (low/high card) · inner join · left join · anti join · window rank · running sum · filter+sort · read parquet</text>
+  <text x="50" y="236" font-size="10" fill="#555">3 Engines: Polars · pandas · DuckDB &nbsp;&nbsp;|&nbsp;&nbsp; 2 Dataset Variants: standard (20 groups) · high cardinality (10K groups)</text>
+
+  <!-- Design decisions -->
+  <rect x="30" y="262" width="230" height="60" rx="6" ry="6" fill="none" stroke="#4C78A8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="145" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#4C78A8">Why Median + IQR?</text>
+  <text x="145" y="295" text-anchor="middle" class="note">Robust to outliers from</text>
+  <text x="145" y="307" text-anchor="middle" class="note">OS scheduling, background tasks</text>
+
+  <rect x="285" y="262" width="230" height="60" rx="6" ry="6" fill="none" stroke="#F58518" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="400" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#F58518">Why Disable GC?</text>
+  <text x="400" y="295" text-anchor="middle" class="note">Prevents garbage collection</text>
+  <text x="400" y="307" text-anchor="middle" class="note">pauses from distorting timing</text>
+
+  <rect x="540" y="262" width="230" height="60" rx="6" ry="6" fill="none" stroke="#54A24B" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="655" y="280" text-anchor="middle" font-size="10" font-weight="600" fill="#54A24B">Why Deterministic Seed?</text>
+  <text x="655" y="295" text-anchor="middle" class="note">Ensures reproducible datasets</text>
+  <text x="655" y="307" text-anchor="middle" class="note">across machines and runs</text>
+</svg>

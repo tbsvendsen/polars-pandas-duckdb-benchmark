@@ -4,9 +4,11 @@
 
 A benchmark suite that measures Polars, pandas and DuckDB on identical operations, using scientific methodology to produce reproducible, comparable results.
 
+![Architecture](docs/architecture.svg)
+
 ```
-datasets.py → operations.py → runner.py → visualize.py
-  generate       define         time        plot
+datasets.py → operations.py → runner.py → run.py → visualize.py / figures.py
+  generate       define         time       orchestrate     plot
 ```
 
 ## Modules
@@ -55,6 +57,17 @@ Generates interactive HTML reports:
 
 Results are also saved as JSON for further analysis.
 
+### figures.py — Matplotlib static figures
+
+Generates publication-ready static PNG figures:
+
+- **Performance overview** — Grouped bar chart with log-scale y-axis, error bars (IQR/2), value annotations
+- **Relative performance** — Normalized to fastest engine per operation (log scale)
+- **Measurement variability** — Box plots showing distribution of individual round timings
+- **Heatmap** — Operations × engines matrix with color-coded timing values
+
+Uses colorblind-friendly palette consistent with the Plotly reports (Polars: `#4C78A8`, pandas: `#F58518`, DuckDB: `#54A24B`).
+
 ### run.py — CLI orchestration
 
 `_dispatch()` routes each (operation, engine) pair to the correct function with the correct arguments. `functools.partial` binds the arguments for the timing loop.
@@ -74,6 +87,8 @@ The CLI supports `--size` (small/medium/large/all) and `--rounds` parameters.
 5. **Deterministic seed throughout** — Same seed for NumPy and Faker means identical datasets across runs. Differences in results come from the engine, not the data.
 
 6. **No pytest-benchmark dependency** — Custom timing code is simpler, gives us exactly the methodology we want, and avoids a transitive dependency.
+
+7. **Log-scale visualization** — Benchmark results span multiple orders of magnitude. Log scale makes all operations comparable without outliers dominating the chart.
 
 ## Testing
 

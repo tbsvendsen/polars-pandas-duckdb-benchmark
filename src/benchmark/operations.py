@@ -28,7 +28,7 @@ def groupby_pandas(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def groupby_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def groupby_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         SELECT group_key,
                SUM(amount) AS total,
@@ -36,7 +36,7 @@ def groupby_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
                SUM(quantity) AS qty_sum
         FROM read_parquet('{path}')
         GROUP BY group_key
-    """)
+    """).fetchdf()
 
 
 # --- Groupby high cardinality ---
@@ -55,14 +55,14 @@ def groupby_high_card_pandas(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def groupby_high_card_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def groupby_high_card_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         SELECT group_key_2,
                SUM(amount) AS total,
                COUNT(*) AS cnt
         FROM read_parquet('{path}')
         GROUP BY group_key_2
-    """)
+    """).fetchdf()
 
 
 # --- Join ---
@@ -86,7 +86,7 @@ def join_inner_pandas(df: pd.DataFrame, lookup: pd.DataFrame) -> pd.DataFrame:
     return df.merge(lookup, on="group_key", how="inner")
 
 
-def join_inner_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def join_inner_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         WITH lookup AS (
             SELECT DISTINCT group_key, ROW_NUMBER() OVER () AS lookup_id
@@ -95,7 +95,7 @@ def join_inner_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
         SELECT t.*, l.lookup_id
         FROM read_parquet('{path}') t
         INNER JOIN lookup l ON t.group_key = l.group_key
-    """)
+    """).fetchdf()
 
 
 def join_left_polars(df: pl.DataFrame, lookup: pl.DataFrame) -> pl.DataFrame:
@@ -106,7 +106,7 @@ def join_left_pandas(df: pd.DataFrame, lookup: pd.DataFrame) -> pd.DataFrame:
     return df.merge(lookup, on="group_key", how="left")
 
 
-def join_left_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def join_left_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         WITH lookup AS (
             SELECT DISTINCT group_key, ROW_NUMBER() OVER () AS lookup_id
@@ -115,7 +115,7 @@ def join_left_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
         SELECT t.*, l.lookup_id
         FROM read_parquet('{path}') t
         LEFT JOIN lookup l ON t.group_key = l.group_key
-    """)
+    """).fetchdf()
 
 
 def join_anti_polars(df: pl.DataFrame, exclude: pl.DataFrame) -> pl.DataFrame:
@@ -127,13 +127,13 @@ def join_anti_pandas(df: pd.DataFrame, exclude: pd.DataFrame) -> pd.DataFrame:
     return merged[merged["_merge"] == "left_only"].drop(columns="_merge")
 
 
-def join_anti_duckdb(path: Path, exclude_keys: list[str]) -> duckdb.DuckDBPyRelation:
+def join_anti_duckdb(path: Path, exclude_keys: list[str]) -> pd.DataFrame:
     keys_str = ", ".join(f"'{k}'" for k in exclude_keys)
     return duckdb.sql(f"""
         SELECT *
         FROM read_parquet('{path}')
         WHERE group_key NOT IN ({keys_str})
-    """)
+    """).fetchdf()
 
 
 # --- Window functions ---
@@ -154,12 +154,12 @@ def window_rank_pandas(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def window_rank_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def window_rank_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         SELECT *,
-               RANK() OVER (PARTITION BY group_key ORDER BY amount DESC) AS rank
+               ROW_NUMBER() OVER (PARTITION BY group_key ORDER BY amount DESC) AS rank
         FROM read_parquet('{path}')
-    """)
+    """).fetchdf()
 
 
 def window_running_sum_polars(df: pl.DataFrame) -> pl.DataFrame:
@@ -174,7 +174,7 @@ def window_running_sum_pandas(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def window_running_sum_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def window_running_sum_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         SELECT *,
                SUM(amount) OVER (
@@ -182,7 +182,7 @@ def window_running_sum_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
                    ROWS UNBOUNDED PRECEDING
                ) AS running_total
         FROM read_parquet('{path}')
-    """)
+    """).fetchdf()
 
 
 # --- Filter + sort ---
@@ -199,13 +199,13 @@ def filter_sort_pandas(df: pd.DataFrame) -> pd.DataFrame:
     return filtered.sort_values("amount", ascending=False)
 
 
-def filter_sort_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
+def filter_sort_duckdb(path: Path) -> pd.DataFrame:
     return duckdb.sql(f"""
         SELECT *
         FROM read_parquet('{path}')
         WHERE amount > 500 AND quantity > 10
         ORDER BY amount DESC
-    """)
+    """).fetchdf()
 
 
 # --- Parquet read ---
@@ -219,8 +219,8 @@ def read_parquet_pandas(path: Path) -> pd.DataFrame:
     return pd.read_parquet(path)
 
 
-def read_parquet_duckdb(path: Path) -> duckdb.DuckDBPyRelation:
-    return duckdb.sql(f"SELECT * FROM read_parquet('{path}')")
+def read_parquet_duckdb(path: Path) -> pd.DataFrame:
+    return duckdb.sql(f"SELECT * FROM read_parquet('{path}')").fetchdf()
 
 
 # --- Helpers ---

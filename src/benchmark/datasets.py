@@ -5,6 +5,7 @@ from __future__ import annotations
 import gc
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -35,7 +36,7 @@ SPECS: list[DatasetSpec] = [
 ]
 
 
-def generate_dataset(spec: DatasetSpec) -> dict[str, object]:
+def generate_dataset(spec: DatasetSpec) -> dict[str, Any]:
     rng = np.random.default_rng(SEED)
     fake = Faker(["en_US"])
     Faker.seed(SEED)
@@ -60,7 +61,7 @@ def generate_dataset(spec: DatasetSpec) -> dict[str, object]:
     else:
         group_key_2 = rng.choice([f"cat_{i}" for i in range(5)], size=n)
 
-    data: dict[str, object] = {
+    data: dict[str, Any] = {
         "id": ids,
         "group_key": groups,
         "group_key_2": group_key_2,
